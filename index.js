@@ -202,8 +202,11 @@ class UniXRequest {
    * @param {object} ctx 请求上下文
    */
   async #returnRequest(ctx) {
+    // 请求是否成功
+    const isSuccess = !!ctx.response.status;
+
     // 请求生命周期钩子: 仅失败时调用请求失败钩子（中止、成功不触发）
-    if (!ctx.abort && !ctx.response.status && isFunc(this.requestFail)) {
+    if (!ctx.abort && !isSuccess && isFunc(this.requestFail)) {
       await this.requestFail(ctx);
     }
 
@@ -227,7 +230,7 @@ class UniXRequest {
     }
 
     // 请求成功
-    if (ctx.response.status) {
+    if (isSuccess) {
       const response = await handleSuccessTip(ctx);
       ctx.response = response;
     }
@@ -257,18 +260,17 @@ class UniXRequest {
       await this.requestComplete(ctx);
     }
 
-    // 处理实际请求结果
-    let actualResponse;
-    if (ctx.request.original) {
-      actualResponse = ctx.response;
-    } else {
-      actualResponse = ctx.response.data;
-    }
-    if (ctx.response.status) {
-      return Promise.resolve(actualResponse);
-    } else {
-      return Promise.reject(actualResponse);
-    }
+    // 处理实际请求结果：original 控制取 data 还是整个响应
+    const original = ctx.request.original || "none";
+    // 判断是否取 data
+    const isTakeData =
+      original === "all" ||
+      (original === "success" && isSuccess) ||
+      (original === "error" && !isSuccess);
+    const actualResponse = isTakeData ? ctx.response.data : ctx.response;
+    return isSuccess
+      ? Promise.resolve(actualResponse)
+      : Promise.reject(actualResponse);
   }
 
   /**
@@ -285,7 +287,7 @@ class UniXRequest {
    * * @param {object} [options.params] url参数
    * * @param {object} [options.restful] restful参数
    * * @param {boolean} [options.print=false] 是否打印请求日志
-   * * @param {boolean} [options.original=false] 是否获取原始响应和配置
+   * * @param {string} [options.original="none"] 返回结果控制：none-全部取原始响应；all-全部取data；success-成功取data失败取原始响应；error-成功取原始响应失败取data
    * * @param {boolean} [options.devWebProxy=true] 是否开启开发环境网页平台代理请求
    * * @param {boolean|object} [options.cache=false] 请求缓存配置
    * * @param {boolean|string|object} [options.loading=false] 请求 loading 配置

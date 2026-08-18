@@ -58,7 +58,7 @@ const DEFAULT_INSTANCE_CONFIG = {
   cache: false,
   print: false,
   devWebProxy: true,
-  original: false,
+  original: "none",
   header: {},
   data: {},
   params: {},

@@ -1,6 +1,6 @@
 {
   "name": "uni-x-request",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "一个基于 `uni.request` 的 uni-app 请求层终极解决方案：配置即接口、缓存即性能、失败即提示。接口服务树、双缓存与并发去重、Mock、环境重写与本地代理、Loading/弹窗提示、错误优先级、请求中断、生命周期钩子——全链路能力开箱即用，让请求层成为项目里最省心的一环。",
   "main": "index.js",
   "exports": {

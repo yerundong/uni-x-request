@@ -123,35 +123,35 @@ try {
 
 > 标记说明：`◆` 实例独有字段；`➤` 与请求参数相同的字段（作为全局默认值，可被请求级覆盖，见[请求参数](#五请求参数request-options)）。
 
-| 字段                    | 类型                                      | 默认值  | 说明                                                                                           |
-| ----------------------- | ----------------------------------------- | ------- | ---------------------------------------------------------------------------------------------- |
-| ◆ `apiConfig`           | `array \| function`                       | `[]`    | 接口配置，函数形式用于动态生成                                                                 |
-| ◆ `rewriteConfig`       | `array \| function`                       | `[]`    | 环境重写配置，见[环境重写](#十一环境重写-rewrite)                                              |
-| ◆ `mockConfig`          | `array \| function`                       | `[]`    | Mock 配置，见[Mock 机制](#十mock-机制)                                                         |
-| ◆ `presetErrorConfig`   | `object \| function`                      | `{}`    | 预置错误配置，与内置默认**浅合并**，见[错误处理](#九错误处理机制)                              |
-| ◆ `beforeRequest`       | `function`                                | -       | 请求前钩子（置 `ctx.abort = true` 可中止请求）                                                 |
-| ◆ `requestSuccess`      | `function`                                | -       | 请求成功钩子（2xx）                                                                            |
-| ◆ `requestFail`         | `function`                                | -       | 请求失败钩子                                                                                   |
-| ◆ `beforePrintRequest`  | `function`                                | -       | 打印前钩子（请求收尾、打印日志前调用）                                                         |
-| ◆ `requestComplete`     | `function`                                | -       | 请求完成钩子（成功/失败都会调用）                                                              |
-| ◆ `customRequestFields` | `object`                                  | -       | 自定义请求字段默认值，优先级：请求级 > 自定义 > 实例                                           |
-| ➤ `baseUrl`             | `string \| function`                      | `''`    | 基础路径，函数形式用于动态获取                                                                 |
-| ➤ `apiUrl`              | `string`                                  | `''`    | 接口路径：`url` 无值时与 `baseUrl` 拼接成 url                                                  |
-| ➤ `url`                 | `string`                                  | `''`    | 完整请求路径：有值则直接使用（优先级最高，不再拼接 baseUrl）；无值则按 `baseUrl + apiUrl` 拼接 |
-| ➤ `header`              | `object`                                  | `{}`    | 默认请求头                                                                                     |
-| ➤ `data`                | `object`                                  | `{}`    | 默认 body 参数                                                                                 |
-| ➤ `params`              | `object`                                  | `{}`    | 默认 url 参数                                                                                  |
-| ➤ `restful`             | `object`                                  | `{}`    | 默认 restful 参数                                                                              |
-| ➤ `method`              | `string`                                  | `'get'` | 默认请求方法                                                                                   |
-| ➤ `timeout`             | `number`                                  | -       | 请求超时（毫秒），透传 `uni.request`                                                           |
-| ➤ `loading`             | `boolean \| string \| object \| function` | `false` | 默认 Loading 配置                                                                              |
-| ➤ `confirm`             | `boolean \| string \| object \| function` | `false` | 默认确认框配置                                                                                 |
-| ➤ `successTip`          | `boolean \| string \| object \| function` | `false` | 默认成功提示配置                                                                               |
-| ➤ `errorTip`            | `boolean \| string \| object \| function` | `true`  | 默认失败提示配置                                                                               |
-| ➤ `cache`               | `boolean \| object`                       | `false` | 默认缓存配置                                                                                   |
-| ➤ `print`               | `boolean`                                 | `false` | 是否打印请求日志（dev 生效）                                                                   |
-| ➤ `devWebProxy`         | `boolean`                                 | `true`  | H5 dev 环境是否走本地代理                                                                      |
-| ➤ `original`            | `boolean`                                 | `false` | 是否返回原始响应（含 statusCode 等）                                                           |
+| 字段                    | 类型                                      | 默认值   | 说明                                                                                           |
+| ----------------------- | ----------------------------------------- | -------- | ---------------------------------------------------------------------------------------------- |
+| ◆ `apiConfig`           | `array \| function`                       | `[]`     | 接口配置，函数形式用于动态生成                                                                 |
+| ◆ `rewriteConfig`       | `array \| function`                       | `[]`     | 环境重写配置，见[环境重写](#十一环境重写-rewrite)                                              |
+| ◆ `mockConfig`          | `array \| function`                       | `[]`     | Mock 配置，见[Mock 机制](#十mock-机制)                                                         |
+| ◆ `presetErrorConfig`   | `object \| function`                      | `{}`     | 预置错误配置，与内置默认**浅合并**，见[错误处理](#九错误处理机制)                              |
+| ◆ `beforeRequest`       | `function`                                | -        | 请求前钩子（置 `ctx.abort = true` 可中止请求）                                                 |
+| ◆ `requestSuccess`      | `function`                                | -        | 请求成功钩子（2xx）                                                                            |
+| ◆ `requestFail`         | `function`                                | -        | 请求失败钩子                                                                                   |
+| ◆ `beforePrintRequest`  | `function`                                | -        | 打印前钩子（请求收尾、打印日志前调用）                                                         |
+| ◆ `requestComplete`     | `function`                                | -        | 请求完成钩子（成功/失败都会调用）                                                              |
+| ◆ `customRequestFields` | `object`                                  | -        | 自定义请求字段默认值，优先级：请求级 > 自定义 > 实例                                           |
+| ➤ `baseUrl`             | `string \| function`                      | `''`     | 基础路径，函数形式用于动态获取                                                                 |
+| ➤ `apiUrl`              | `string`                                  | `''`     | 接口路径：`url` 无值时与 `baseUrl` 拼接成 url                                                  |
+| ➤ `url`                 | `string`                                  | `''`     | 完整请求路径：有值则直接使用（优先级最高，不再拼接 baseUrl）；无值则按 `baseUrl + apiUrl` 拼接 |
+| ➤ `header`              | `object`                                  | `{}`     | 默认请求头                                                                                     |
+| ➤ `data`                | `object`                                  | `{}`     | 默认 body 参数                                                                                 |
+| ➤ `params`              | `object`                                  | `{}`     | 默认 url 参数                                                                                  |
+| ➤ `restful`             | `object`                                  | `{}`     | 默认 restful 参数                                                                              |
+| ➤ `method`              | `string`                                  | `'get'`  | 默认请求方法                                                                                   |
+| ➤ `timeout`             | `number`                                  | -        | 请求超时（毫秒），透传 `uni.request`                                                           |
+| ➤ `loading`             | `boolean \| string \| object \| function` | `false`  | 默认 Loading 配置                                                                              |
+| ➤ `confirm`             | `boolean \| string \| object \| function` | `false`  | 默认确认框配置                                                                                 |
+| ➤ `successTip`          | `boolean \| string \| object \| function` | `false`  | 默认成功提示配置                                                                               |
+| ➤ `errorTip`            | `boolean \| string \| object \| function` | `true`   | 默认失败提示配置                                                                               |
+| ➤ `cache`               | `boolean \| object`                       | `false`  | 默认缓存配置                                                                                   |
+| ➤ `print`               | `boolean`                                 | `false`  | 是否打印请求日志（dev 生效）                                                                   |
+| ➤ `devWebProxy`         | `boolean`                                 | `true`   | H5 dev 环境是否走本地代理                                                                      |
+| ➤ `original`            | `string`                                  | `"none"` | 返回结果控制：`none`/`all`/`success`/`error`，见[13.2 返回值约定](#132-返回值约定)             |
 
 > `baseUrl`、`apiConfig`、`rewriteConfig`、`mockConfig`、`presetErrorConfig` 支持函数惰性求值，适合"登录后动态拼接地址""按环境动态取配置"等场景。
 
@@ -310,11 +310,11 @@ errorTip: {
 
 ### 5.7 其他
 
-| 字段          | 类型      | 默认    | 说明                                                                        |
-| ------------- | --------- | ------- | --------------------------------------------------------------------------- |
-| `print`       | `boolean` | `false` | 请求打印开关                                                                |
-| `original`    | `boolean` | `false` | 为 `true` 时 resolve/reject 整个响应对象（含 statusCode/header/errCode 等） |
-| `devWebProxy` | `boolean` | `true`  | H5 dev 环境走本地代理                                                       |
+| 字段          | 类型      | 默认     | 说明                                                                               |
+| ------------- | --------- | -------- | ---------------------------------------------------------------------------------- |
+| `print`       | `boolean` | `false`  | 请求打印开关                                                                       |
+| `original`    | `string`  | `"none"` | 返回结果控制：`none`/`all`/`success`/`error`，见[13.2 返回值约定](#132-返回值约定) |
+| `devWebProxy` | `boolean` | `true`   | H5 dev 环境走本地代理                                                              |
 
 ---
 
@@ -524,7 +524,7 @@ new UniXRequest({
 
 ### 9.3 错误流向
 
-失败时，最终 errorMessage 的 `code`/`message` 写入响应 `errCode`/`errMsg`，并据此弹提示（`enable: true` 时）。调用方 catch 拿到的是 `response.data`（或 `original` 时整个 response）。
+失败时，最终 errorMessage 的 `code`/`message` 写入响应 `errCode`/`errMsg`，并据此弹提示（`enable: true` 时）。调用方 catch 拿到的内容由 `original` 决定，见[13.2 返回值约定](#132-返回值约定)。
 
 **网络层失败**（超时、断网、abort 等）不走 HTTP 状态码预置：catch 检测到原生错误 `errMsg` 含 `abort` 时置 `ctx.abort = true`，最终 reject 裸字符串 `"Request aborted"`（不弹提示）；其余网络错误直接取原生 `errno`/`error` 写入 `errCode`、`errMsg`/`errorMessage` 写入 `errMsg`。再由 `requestFail` 钩子补充处理（如设置业务文案、跳登录）。
 
@@ -636,22 +636,28 @@ vite 项目可参考 `server.proxy` 或同类中间件实现。
 
 ## 十三、响应与返回值
 
-### 13.1 响应对象（`original: false` 时只取 data）
+### 13.1 响应对象
 
 | 字段                                  | 说明                                                          |
 | ------------------------------------- | ------------------------------------------------------------- |
 | `status`                              | `1` 成功 / `0` 失败（内部标志，默认 `0`，成功路径显式置 `1`） |
-| `data`                                | 业务数据（成功 resolve、失败 reject 的都是它）                |
+| `data`                                | 业务数据                                                      |
 | `errCode` / `errMsg`                  | 失败时写入的最终错误码 / 文案                                 |
-| `statusCode`                          | HTTP 状态码（`original` 可见）                                |
+| `statusCode`                          | HTTP 状态码（取原始响应时可见）                               |
 | `duration`                            | 请求耗时（毫秒，Mock 不统计）                                 |
 | `mockHit` / `cacheHit` / `rewriteHit` | 命中标识                                                      |
 | `header` / `cookies` 等               | uni.request 原始响应字段                                      |
 
 ### 13.2 返回值约定
 
-- `original: false`（默认）：**resolve/reject** **`response.data`**
-- `original: true`：resolve/reject 整个 `response`
+`original` 控制 resolve/reject 的内容（默认 `"none"`）：
+
+| `original`     | 成功 resolve    | 失败 reject     |
+| -------------- | --------------- | --------------- |
+| `none`（默认） | 整个 `response` | 整个 `response` |
+| `all`          | `response.data` | `response.data` |
+| `success`      | `response.data` | 整个 `response` |
+| `error`        | 整个 `response` | `response.data` |
 
 **注意**：失败时 reject 的是业务数据而非 Error 对象，请用 `try/catch` 或 `.catch` 处理，不要依赖 `error.message`。
 
@@ -797,7 +803,7 @@ src/uni-x-request/
 ## 十六、常见问题 FAQ
 
 **Q1：失败时 reject 的不是 Error，拿不到 error.message？**
-失败 reject 的是 `response.data`（其中不含 `errCode`/`errMsg`）。要看错误码/文案请设置 `original: true` 拿完整响应（`response.errCode`/`errMsg`），或开启 `print` 看打印日志。
+失败 reject 的内容由 `original` 决定：默认 `"none"` 取整个 `response`（含 `errCode`/`errMsg`）；若设 `"all"` 则只取 `response.data`（不含错误码/文案）。要稳定拿到错误码/文案，可设 `original: "error"`（失败取整个 response），或开启 `print` 看打印日志。
 
 **Q2：请求取消了还会弹"系统异常"？**
 不会。取消/中止的请求会 reject 裸字符串 `"Request aborted"`，不进入错误提示流程，不弹任何提示。

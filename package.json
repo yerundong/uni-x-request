@@ -1,10 +1,17 @@
 {
   "name": "uni-x-request",
-  "version": "1.0.1",
-  "description": "一个基于 `uni.request` 的 uni-app 请求封装库，提供接口服务树、请求缓存、并发去重、Mock、环境重写、Loading/弹窗提示、错误优先级、请求中断、生命周期钩子等开箱即用的能力。",
+  "version": "1.1.0",
+  "description": "一个基于 `uni.request` 的 uni-app 请求层终极解决方案：配置即接口、缓存即性能、失败即提示。接口服务树、双缓存与并发去重、Mock、环境重写与本地代理、Loading/弹窗提示、错误优先级、请求中断、生命周期钩子——全链路能力开箱即用，让请求层成为项目里最省心的一环。",
   "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "sideEffects": false,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=12"
   },
   "repository": {
     "type": "git",
@@ -16,7 +23,12 @@
     "request",
     "http",
     "https",
-    "uni-request"
+    "uni-request",
+    "http-client",
+    "cache",
+    "mock",
+    "restful",
+    "network"
   ],
   "license": "MIT",
   "bugs": {

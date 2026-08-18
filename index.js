@@ -275,11 +275,9 @@ class UniXRequest {
    * 请求方法
    * @param {object} options 请求配置
    * * @param {string} [options.method='get'] 请求类型
-   *
    * * @param {string} options.url 完整请求路径。若无值，会根据 baseUrl 和 apiUrl 参数拼接；若有值，会直接使用该值。
    * * @param {string} options.baseUrl 请求基础路径
    * * @param {string} options.apiUrl 请求接口路径
-   *
    * * @param {object} [options.header] 头部信息
    * * @param {number} [options.timeout] 请求延时
    * * @param {number} [options.responseType] 响应的数据类型，支持text/arraybuffer/json
@@ -289,71 +287,12 @@ class UniXRequest {
    * * @param {boolean} [options.print=false] 是否打印请求日志
    * * @param {boolean} [options.original=false] 是否获取原始响应和配置
    * * @param {boolean} [options.devWebProxy=true] 是否开启开发环境网页平台代理请求
-   *
    * * @param {boolean|object} [options.cache=false] 请求缓存配置
-   * * 1.object类型参数说明：
-   * * @param {boolean} [options.cache.enable=true] 是否开启请求缓存
-   * * @param {number} [options.cache.expire] 缓存有效时间（单位毫秒）。过了这个时间, 就会自动清除缓存。不传默认永不清除。
-   * * @param {number} [options.cache.expireAt] 缓存过期时间节点（时间戳）。与 expire 设置任一即可生效；若两者都设置，以 expire 为准（由 expire 生成过期时间节点）。
-   * * @param {string} [options.cache.id] 缓存id。每次请求的唯一标识。若不传，将由请求参数自动生成。调用 clearCacheById(cacheId)可实现清除缓存
-   * * @param {string} [options.cache.class] 缓存类名，不同请求可以重复。调用 clearCacheByClass(cacheClass)可实现批量清除缓存
-   * * @param {string} [options.cache.mode='throttle'] 缓存模式。有两种：throttle - 节流，debounce - 防抖
-   * * @param {boolean} [options.cache.persist=false] 是否持久化到本地存储。开启后成功结果会额外写入本地存储，冷启动后可恢复；失败结果始终不缓存，也不会持久化
-   * * 2.boolean类型参数说明：表示 cache.enable 的值, 其他配置字段取用默认值
-   *
    * * @param {boolean|string|object} [options.loading=false] 请求 loading 配置
-   * * 1.object类型参数说明：
-   * * * @param {boolean} [options.loading.enable=true] 是否开启loading
-   * * * @param 剩余其他配置项和 uni.showLoading 一致
-   * * 2.boolean类型参数说明：表示 loading.enable 的值, 其他配置字段取用默认值
-   * * 3.string类型参数说明：表示 loading.title 的值, 其他配置字段取用默认值
-   * * 4.function类型参数说明：
-   * * function执行如返回object类型, 与上面1相同；
-   * * function执行如返回boolean类型, 与上面2相同
-   * * function执行如返回string类型, 与上面3相同
-   *
    * * @param {boolean|string|object} [options.confirm=false] 请求前询问确认配置
-   * * 1.object类型参数说明：
-   * * * @param {boolean} [options.confirm.enable=true] 是否开启确认框
-   * * * @param 剩余其他配置项和 uni.showModal 一致
-   * * 2.boolean类型参数说明：表示 confirm.enable 的值, 其他配置字段取用默认值
-   * * 3.string类型参数说明：表示 confirm.content 的值, 其他配置字段取用默认值
-   * * 4.function类型参数说明：
-   * * function执行如返回object类型, 与上面1相同；
-   * * function执行如返回boolean类型, 与上面2相同
-   * * function执行如返回string类型, 与上面3相同
-   *
    * * @param {object|string|function} [options.successTip=false] 请求成功提示配置
-   * * * 1.object类型参数说明：
-   * * * @param {boolean} [successTip.enable=true] 是否开启成功提示
-   * * * @param {string} successTip.message 成功提示语，toast 的 title，modal的 content
-   * * * @param {boolean} [successTip.sync=false] 提示是否为同步的
-   * * * @param {'auto'|'toast'|'modal'} [successTip.popupType='auto'] 提示框形式, 可选值：auto/toast/modal, 默认为auto, 根据提示文本长度自动选择 toast 和 modal
-   * * * @param 剩余其他配置项和 uni.showToast、uni.showModal 一致
-   * * * 2.boolean类型参数说明：表示 successTip.enable 的值, 其他配置字段取用默认值
-   * * * 3.string类型参数说明：表示successTip.message的值, 其他配置字段取用默认值
-   * * * 4.function类型参数说明：
-   * * * function执行如返回object类型, 与上面1相同；
-   * * * unction执行如返回boolean类型, 与上面2相同
-   * * * function执行如返回string类型, 与上面3相同
-   *
    * * @param {object|boolean|string|function} [options.errorTip=true] 请求异常消息配置
-   * * * 1.object类型参数说明：
-   * * * @param {boolean} [errorTip.enable=true] 是否开启异常提示
-   * * * @param {string} [errorTip.message] 异常提示语
-   * * * @param {string} errorTip.code 异常码
-   * * * @param {boolean} [errorTip.priority=1] 提示优先级
-   * * * @param {boolean} [errorTip.sync=false] 提示是否为同步的
-   * * * @param {'auto'|'toast'|'modal'} [errorTip.popupType='auto'] 提示框形式, 可选值：auto/toast/modal, 默认为 auto, 根据提示文本长度自动选择 toast 和 modal
-   * * * @param 剩余其他配置项和 uni.showToast、uni.showModal 一致
-   * * * 2.boolean类型参数说明：
-   * * * 表示 errorTip.enable 的值, 其他配置字段取用默认值
-   * * * 3.string类型参数说明：
-   * * * 表示 errorTip.message的值, 其他配置字段取用默认值
-   * * * 4.function类型参数说明：
-   * * * function执行如返回object类型, 与上面1相同；
-   * * * unction执行如返回boolean类型, 与上面2相同
-   * * * function执行如返回string类型, 与上面3相同
+   * * @param 其他字段，uni.request 的其余入参原样透传
    */
   async request(options) {
     // 每次请求独立的上下文：承载请求配置、响应、loading、耗时、任务等状态
